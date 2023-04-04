@@ -1,0 +1,41 @@
+package Utils;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+
+import java.time.Duration;
+
+public class CommonMethods {
+    public static WebDriver driver;
+
+    public static void openBrowserAndLaunchApplication() {
+        ConfigReader.readProperties();
+
+
+        String browserType = new String (ConfigReader.getPropertyValue("browserType"));
+        switch (browserType) {
+            case "Chrome":
+                driver = new ChromeDriver();
+                break;
+            case "Firefox":
+                driver = new FirefoxDriver();
+                break;
+            case "IE":
+                driver = new InternetExplorerDriver();
+                break;
+            default:
+                driver = new EdgeDriver();
+                break;
+        }
+        driver.manage().window().maximize();
+        driver.get(ConfigReader.getPropertyValue("URL"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.WAIT_TIME));
+    }
+
+    public static void closeBrowser() {
+        driver.close();
+    }
+}
