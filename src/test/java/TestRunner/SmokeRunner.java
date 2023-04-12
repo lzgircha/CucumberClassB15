@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(features = "src/test/resources/Features",
         glue = "StepDefinitions",
         dryRun = false,
-        tags = "@smoke2", //comment out if you want to run all cases together
+        tags = "@smoke", //comment out if you want to run all cases together
         plugin = {"pretty"} //makes the information on your console more readable, presentable
 )
 //if you want to run two test cases at the same time use "or" Ex. tags = "@testcase1 or @testcase2"

@@ -8,6 +8,7 @@ public class Hooks extends CommonMethods {
 
     @Before
     public void preCondition () {
+
         openBrowserAndLaunchApplication();
     }
 
