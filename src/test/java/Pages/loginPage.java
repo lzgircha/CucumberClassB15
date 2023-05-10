@@ -10,7 +10,7 @@ public class loginPage extends CommonMethods {
 
     public loginPage()
     {
-        PageFactory.initElements(driver,this); //we are telling to initialize each webElement with the driver, the reason we are using constructor
+        PageFactory.initElements(driver,this); //we are telling to initialize each webElement of the current page with the driver, the reason we are using constructor
     }
     //---------------------------Page Factory Model to store webElements------------------------------------------
     @FindBy(id = "txtUsername")
