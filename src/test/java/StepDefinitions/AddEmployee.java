@@ -2,9 +2,15 @@ package StepDefinitions;
 
 import Utils.CommonMethods;
 import Utils.ConfigReader;
+import Utils.DBUtility;
+import Utils.GlobalVariables;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import java.util.SortedMap;
 
 public class AddEmployee extends CommonMethods {
     @When("user click on PIM option")
@@ -51,5 +57,43 @@ public class AddEmployee extends CommonMethods {
     public void user_clicks_on_save_button() {
 
         //WebElement saveBtn = driver.findElement(By.id("btnSave"));
-        //doClick(addEmployeePage.btnSave);
-    }}
+        Assert.assertTrue(addEmployeePage.saveBtn.isDisplayed());
+        doClick(addEmployeePage.saveBtn);
+    }
+
+    @When("user enters {string} and {string} and  {string}")
+    public void user_enters_and_and(String fname, String mname, String lname) {
+        sendText(addEmployeePage.firstNameTextBox, fname);
+        sendText(addEmployeePage.middleNameTextBox, mname);
+        sendText(addEmployeePage.lastNameTextBox, lname);
+    }
+
+    @When("user captures the employee id")
+    public void user_captures_the_employee_id() {
+        GlobalVariables.emp_id = addEmployeePage.empIdLocator.getAttribute("value");
+        System.out.println("The employee ID is: " + GlobalVariables.emp_id);
+    }
+
+    @When("query the information in backend")
+    public void query_the_information_in_backend() {
+        String query = "Select * from hs_hr_employees where employee_id='" + GlobalVariables.emp_id + "'";
+        //to store the table coming from db, we used global variable here
+        //in this variable we got all the keys and values for the employee we searched
+        GlobalVariables.tabledata = DBUtility.getListOfMapsFromRset(query);
+    }
+
+    @Then("verify the results from frontend and backend")
+    public void verify_the_results_from_frontend_and_backend() {
+        //now, from all these values we need to compare one by one value
+        String firstNameFromDB = GlobalVariables.tabledata.get(0).get("emp_firstname");
+        System.out.println(firstNameFromDB);
+        String lastNameFromDB = GlobalVariables.tabledata.get(0).get("emp_lastname");
+        System.out.println(lastNameFromDB);
+
+        //adding assertions
+        Assert.assertEquals(firstNameFromDB,"nesha");
+        Assert.assertEquals(firstNameFromDB,"standart");
+        System.out.println("My assertion has passed my test case");
+    }
+
+}
