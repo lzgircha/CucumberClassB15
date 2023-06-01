@@ -56,6 +56,7 @@ public class HardCodedExamples {
                         "}");
 
         //hitting the endpoint/send the request
+        //preparedRequest contains all the information and you attach it to the request
         Response response = preparedRequest.when().post("/createEmployee.php");
         //it will print the output in the console, only for API
         response.prettyPrint();

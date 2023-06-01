@@ -92,7 +92,7 @@ public class AddEmployee extends CommonMethods {
 
         //adding assertions
         Assert.assertEquals(firstNameFromDB,"nesha");
-        Assert.assertEquals(firstNameFromDB,"standart");
+        Assert.assertEquals(lastNameFromDB,"standart");
         System.out.println("My assertion has passed my test case");
     }
 
