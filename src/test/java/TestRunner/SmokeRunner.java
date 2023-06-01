@@ -6,7 +6,7 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "/Users/larisazgircha/Desktop/git Practice/CucumberBatch15/src/test/resources/Features",
+@CucumberOptions(features = "src/test/resources/Features",
         glue = "StepDefinitions",
         dryRun = false,
         tags = "@database", //comment out if you want to run all cases together
